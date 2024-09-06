@@ -1,15 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: 'https://66d26bfb184dce1713cd8a3e.mockapi.io/api/v1/',
-});
+import { instance } from "../../services/instance";
 
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",
   async (_, thunkAPI) => {
     try {
-      const { data } = await instance.get('contact');
+      const { data } = await instance.get('/contacts', {
+        params: {
+          Authorization: ''
+        }
+      });
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -40,4 +40,3 @@ export const deleteContact = createAsyncThunk(
     }
   }
 );
-

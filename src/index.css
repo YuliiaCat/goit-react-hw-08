@@ -5,7 +5,7 @@
 }
 
 body {
-  margin: 50px;
+  margin: 0;
   min-width: 320px;
 }
 
@@ -39,3 +39,43 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.pages {
+  margin: 50px;
+}
+
+.greet {
+  font-size: 50px;
+  text-transform: uppercase;
+  color: #8E198E;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.notebook {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  transform: scale(0.5);
+  animation: grow 3s forwards;
+}
+
+.notebook path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 3s ease forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes grow {
+  to {
+    transform: scale(1);
+  }
+}
+
+
