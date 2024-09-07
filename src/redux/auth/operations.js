@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { instance, setAuthHeaders } from "../../services/instance";
+import { clearAuthHeader, instance, setAuthHeaders } from "../../services/instance";
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -29,12 +29,10 @@ export const register = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   'auth/logout',
-  async (userData, thunkApi) => {
+  async (_, thunkApi) => {
     try {
-      const { data } = await instance.post('users/logout', userData);
-      setAuthHeaders(data.token);
-      console.log('logout', data)
-      return data;
+      await instance.post('users/logout');
+      clearAuthHeader();
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
     }
@@ -43,14 +41,25 @@ export const logout = createAsyncThunk(
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
-  async (userData, thunkApi) => {
+  async (_, thunkApi) => {
     try {
-      const { data } = await instance.get('users/login', userData);
-      setAuthHeaders(data.token);
-      console.log('refresh', data)
+      const state = thunkApi.getState();
+      const token = state.auth.token;
+      setAuthHeaders(token);
+      const { data } = await instance.get('users/current');
       return data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
+    }
+  },
+  {
+    condition: (_, thunkApi) => {
+      const state = thunkApi.getState();
+      const token = state.auth.token;
+
+      if (token) return true;
+
+      return false;
     }
   }
 );

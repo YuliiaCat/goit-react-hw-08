@@ -52,10 +52,14 @@ img {
   margin-bottom: 50px;
 }
 
-.notebook {
+.notebook,
+.react {
   width: 200px;
   height: 200px;
   margin: 0 auto;
+}
+
+.notebook {
   transform: scale(0.5);
   animation: grow 3s forwards;
 }
@@ -78,4 +82,27 @@ img {
   }
 }
 
+.react {
+  animation: rotate 8s linear infinite;
+}
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.phonebookEmpty {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 26px;
+  color: violet;
+  margin: 30px;
+}

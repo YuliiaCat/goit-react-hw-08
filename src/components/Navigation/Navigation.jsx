@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styles from './Navigation.module.css';
 import classNames from "classnames";
+import { useSelector } from "react-redux";
+import { selectAuthIsLoggedIn } from "../../redux/auth/selectors";
 
 const getLinkStyle = ({ isActive }) => 
   classNames(styles.link, {
@@ -8,20 +10,19 @@ const getLinkStyle = ({ isActive }) =>
   });
 
 const Navigation = () => {
+  const isLoggedIn = useSelector(selectAuthIsLoggedIn);
+
   return (
-    <nav className={styles.nav}>
+    <div className={styles.nav}>
       <NavLink to="/" className={getLinkStyle}>
         Home
       </NavLink>
-      <div>
-      <NavLink to="/register" className={getLinkStyle}>
-        Register
-      </NavLink>
-      <NavLink to="/login" className={getLinkStyle}>
-        Log in
-      </NavLink>
-      </div>
-    </nav>
+      {isLoggedIn && (
+        <NavLink className={getLinkStyle} to="/contacts">
+          Contacts
+        </NavLink>
+      )}
+    </div>
   );
 }
 

@@ -18,11 +18,25 @@
 
 .item {
   display: flex;
+  align-items: baseline;
   gap: 10px;
 }
 
 .icon {
   fill: violet;
+}
+
+.input {
+  width: 120px;
+  border-radius: 5px;
+  border: 1px solid violet;
+  overflow: hidden;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .btn {

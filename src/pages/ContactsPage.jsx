@@ -7,6 +7,7 @@ import { selectContacts } from "../redux/contacts/selectors";
 import { selectVisibleContacts } from "../redux/filters/selectors";
 import { useEffect } from "react";
 import { fetchContacts } from "../redux/contacts/operations";
+import { PiSmileyMeltingThin } from "react-icons/pi";
 
 const ContactsPage = () => {
   const contacts = useSelector(selectVisibleContacts);
@@ -25,7 +26,14 @@ const ContactsPage = () => {
       <SearchBox />
       {loading && <Loader />}
       {error && <p>Cant load contacts at the moment</p>}
-      {!loading && !error && <ContactList contacts={contacts} />}
+      {!loading && !error && contacts.length !== 0 ? (
+        <ContactList contacts={contacts} />
+      ) : (
+        <div className="phonebookEmpty">
+          <p>The phonebook is empty</p>
+          <PiSmileyMeltingThin />
+        </div>
+      ) }
     </>
   );
 }

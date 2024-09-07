@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { login } from '../../redux/auth/operations';
 import { selectAuthError } from '../../redux/auth/selectors';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const emailField = 'email-field';
   const passwordField = 'password-field';
   const dispatch = useDispatch();
   const error = useSelector(selectAuthError);
+  const navigate = useNavigate();
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').min(8, 'Password should contain at least 8 symbols').max(50, "Too Long!"),
@@ -22,6 +24,7 @@ const LoginForm = () => {
       password: values.password,
     }));
     actions.resetForm();
+    navigate('/');
   };
 
   return (

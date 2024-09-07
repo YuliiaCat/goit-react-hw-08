@@ -1,0 +1,38 @@
+.box {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 22px;
+  padding: 20px;
+  text-transform: uppercase;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: violet;
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: 22px;
+  padding: 20px 30px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #fef5f7;
+  background-color: violet;
+}
+
+.icon {
+  fill: violet;
+}
